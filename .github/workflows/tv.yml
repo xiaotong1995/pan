@@ -95,24 +95,11 @@ jobs:
       - name: Run qita
         run: python ${{ github.workspace }}/qita.py
         
-      needs: job1
       #- name: Upload a Build Artifact
         #uses: actions/upload-artifact@v4.0.0
         #with:
           #name: itv
           #path: ${{ github.workspace }}/
-
-  job5:
-      runs-on: ubuntu-latest
-
-      steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-    
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.x
 
       - name: 提交更改
         run: |
@@ -123,4 +110,4 @@ jobs:
           git commit *.m3u -m "Add generated file"
           #git pull --rebase
           git push -f
-      needs:  [job2, job3, job4]
+      needs:  [job2, job3]
