@@ -1,4 +1,4 @@
-name: iptv
+name: iptv-fl
 
 on:
   schedule:
