@@ -1,13 +1,13 @@
-name: iptv-fl
+name: iptv-job
 
 on:
   schedule:
-    - cron: '1 */6 * * *'
+    - cron: '16 */5 * * *'
   push:
     branches:
       - main
 jobs:
-  build:
+  job1:
     runs-on: ubuntu-latest
 
     steps:
@@ -35,25 +35,84 @@ jobs:
 
       - name: Run itv
         run: python ${{ github.workspace }}/itv.py
+  job2:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+    
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: pip install selenium requests futures eventlet
 
       #- name: Run itvtest
         #run: python ${{ github.workspace }}/itvtest.py
       
-      #- name: Run cctv
-      #  run: python ${{ github.workspace }}/cctv.py
-        
-     # - name: Run weishi
-     #   run: python ${{ github.workspace }}/weishi.py
-        
-    #  - name: Run qita
-     #   run: python ${{ github.workspace }}/qita.py
-        
+      - name: Run cctv
+        run: python ${{ github.workspace }}/cctv.py
+          
+    needs: job1
+          
+  job3:
+      runs-on: ubuntu-latest
 
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+    
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: pip install selenium requests futures eventlet
+
+      - name: Run weishi
+        run: python ${{ github.workspace }}/weishi.py
+      needs: job1
+
+  job4:
+      runs-on: ubuntu-latest
+
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+    
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: pip install selenium requests futures eventlet
+        
+      - name: Run qita
+        run: python ${{ github.workspace }}/qita.py
+        
+      needs: job1
       #- name: Upload a Build Artifact
         #uses: actions/upload-artifact@v4.0.0
         #with:
           #name: itv
           #path: ${{ github.workspace }}/
+
+  job5:
+      runs-on: ubuntu-latest
+
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+    
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
 
       - name: 提交更改
         run: |
@@ -64,3 +123,4 @@ jobs:
           git commit *.m3u -m "Add generated file"
           #git pull --rebase
           git push -f
+      needs:  [job2, job3, job4]
