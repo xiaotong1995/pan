@@ -97,7 +97,10 @@ def channel_key(channel_name):
 # 对频道进行排序
 results.sort(key=lambda x: (x[0], -float(x[2].split()[0])))
 #results.sort(key=lambda x: channel_key(x[0]))
-now_today = datetime.date.today()
+
+#now_today = datetime.date.today()
+now_today = datetime.datetime.now()   #具体时间
+
 # 将结果写入文件
 
 result_counter = 12  # 每个频道需要的个数
@@ -118,7 +121,7 @@ with open("qita.txt", 'w', encoding='utf-8') as file:
                 file.write(f"{channel_name},{channel_url}\n")
                 channel_counters[channel_name] = 1
                 
-    file.write(f"{now_today}更新,#genre#\n")
+    file.write(f"{}更新,#genre#\n")
 
 with open("qita.m3u", 'w', encoding='utf-8') as file:
     channel_counters = {}
