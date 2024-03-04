@@ -98,7 +98,7 @@ def channel_key(channel_name):
 results.sort(key=lambda x: (x[0], -float(x[2].split()[0])))
 #results.sort(key=lambda x: channel_key(x[0]))
 
-#now_today = datetime.date.today()
+#now_today = datetime.date.today（）
 now_today = datetime.datetime.now()   #具体时间
 
 # 将结果写入文件
@@ -137,11 +137,11 @@ with open("qita.m3u", 'w', encoding='utf-8') as file:
                     file.write(f"{channel_url}\n")
                     channel_counters[channel_name] += 1
             else:
-                文件。write（f“#EXTINF：-1 group-title=\”其他频道\“，{channel_name}\n”）
+                file.write(f"#EXTINF:-1 group-title=\"其他频道\"，{channel_name}\n")
                 file.write(f"{channel_url}\n")
                 channel_counters[channel_name] = 1
     
-    文件。write（f“#EXTINF：-1 group-title=\”{now_today}更新\“\n”）
+    file.write(f"#EXTINF:-1 group-title=\"{now_today}更新\"\n")
 
 
 # 合并文件内容
