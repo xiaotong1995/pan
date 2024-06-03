@@ -72,7 +72,7 @@ def worker():
 
 
 # 创建多个工作线程
-num_threads = 10
+num_threads = 15
 for _ in range(num_threads):
     t = threading.Thread(target=worker, daemon=True) 
     #t = threading.Thread(target=worker, args=(event,len(channels)))  # 将工作线程设置为守护线程
@@ -100,7 +100,7 @@ results.sort(key=lambda x: (x[0], -float(x[2].split()[0])))
 now_today = datetime.date.today()
 # 将结果写入文件
 
-result_counter = 12  # 每个频道需要的个数
+result_counter = 8  # 每个频道需要的个数
 
 with open("weishi.txt", 'w', encoding='utf-8') as file:
     channel_counters = {}
