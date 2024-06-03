@@ -2,7 +2,7 @@ name: iptv-job
 
 on:
   schedule:
-    - cron: '16 */5 * * *'
+    - cron: '41 */7 * * *'
   push:
     branches:
       - main
