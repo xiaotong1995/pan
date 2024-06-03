@@ -72,7 +72,7 @@ def worker():
 
 
 # 创建多个工作线程
-num_threads = 10
+num_threads = 15
 for _ in range(num_threads):
     t = threading.Thread(target=worker, daemon=True) 
     #t = threading.Thread(target=worker, args=(event,len(channels)))  # 将工作线程设置为守护线程
@@ -103,7 +103,7 @@ now_today = datetime.datetime.now()   #具体时间
 
 # 将结果写入文件
 
-result_counter = 12  # 每个频道需要的个数
+result_counter = 10  # 每个频道需要的个数
 
 with open("qita.txt", 'w', encoding='utf-8') as file:
     channel_counters = {}
